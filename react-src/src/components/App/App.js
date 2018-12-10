@@ -6,8 +6,8 @@ import io from 'socket.io-client';
 import TableUser from '../TableUser/TableUser';
 import ModalUser from '../ModalUser/ModalUser';
 
-import logo from '../../logo.svg';
-import shirts from '../../shirts.png';
+//import logo from '../../logo.svg';
+//import shirts from '../../shirts.png';
 import './App.css';
 
 class App extends Component {
@@ -79,14 +79,14 @@ class App extends Component {
   render() {
 
     let online = this.state.online;
-    let verb = (online <= 1) ? 'is' : 'are'; // linking verb, if you'd prefer
-    let noun = (online <= 1) ? 'person' : 'people';
+    // let verb = (online <= 1) ? 'is' : 'are'; // linking verb, if you'd prefer
+    // let noun = (online <= 1) ? 'person' : 'people';
 
     return (
       <div>
         <div className='App'>
           <div className='App-header'>
-            <img src={logo} className='App-logo' alt='logo' />
+            {/* <img src={logo} className='App-logo' alt='logo' />
             <h1 className='App-intro'>MERN CRUD</h1>
             <p>A simple records system using MongoDB, Express.js, React.js, and Node.js with real-time Create, Read, Update, and Delete operations using Socket.io.</p>
             <p>REST API was implemented on the back-end. Semantic UI React was used for the UI.</p>
@@ -96,7 +96,7 @@ class App extends Component {
             <a className='shirts' href='https://www.teepublic.com/user/codeweario' target='_blank' rel='noopener noreferrer'>
               <img src={shirts} alt='Programmer Shirts' />
               <span>Ad</span>
-            </a>
+            </a> */}
           </div>
         </div>
         <Container>
@@ -109,7 +109,7 @@ class App extends Component {
             server={this.server}
             socket={this.socket}
           />
-          <em id='online'>{`${online} ${noun} ${verb} online.`}</em>
+          {/* <em id='online'>{`${online} ${noun} ${verb} online.`}</em> */}
           <TableUser
             onUserUpdated={this.handleUserUpdated}
             onUserDeleted={this.handleUserDeleted}

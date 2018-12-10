@@ -36,7 +36,8 @@ class FormUser extends Component {
         this.setState({
           name: response.data.name,
           email: response.data.email,
-          age: (response.data.age === null) ? '' : response.data.age,
+        //age: (response.data.age == null) ? response.data.age : response.data.age,
+          age : response.data.age,
           gender: response.data.gender,
         });
       })
@@ -128,37 +129,43 @@ class FormUser extends Component {
 
     return (
       <Form className={formClassName} onSubmit={this.handleSubmit}>
-        <Form.Input
-          label='Name'
-          type='text'
-          placeholder='Elon Musk'
-          name='name'
-          maxLength='40'
-          required
-          value={this.state.name}
-          onChange={this.handleInputChange}
-        />
+       
+
+
+       
         <Form.Input
           label='Email'
           type='email'
-          placeholder='elonmusk@tesla.com'
+          placeholder=''
           name='email'
           maxLength='40'
           required
           value={this.state.email}
           onChange={this.handleInputChange}
         />
+         <Form.Input
+          label='EVENT'
+          type='text'
+          placeholder=''
+          name='name'
+          maxLength='40'
+          required
+          value={this.state.name}
+          onChange={this.handleInputChange}
+        />
+       
         <Form.Group widths='equal'>
           <Form.Input
-            label='Age'
-            type='number'
-            placeholder='18'
-            min={5}
-            max={130}
+            label='description'
+            type='text'
+            placeholder=''
             name='age'
+            maxLength='40'
+            required
             value={this.state.age}
             onChange={this.handleInputChange}
           />
+      
           <Form.Field
             control={Select}
             label='Gender'

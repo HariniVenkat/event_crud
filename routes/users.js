@@ -44,8 +44,8 @@ router.post('/', postLimiter, (req, res) => {
 
   // Validate the age
   let age = sanitizeAge(req.body.age);
-  if (age < 5 && age != '') return res.status(403).json({ success: false, msg: `You're too young for this.` });
-  else if (age > 130 && age != '') return res.status(403).json({ success: false, msg: `You're too old for this.` });
+  // if (age < 5 && age != '') return res.status(403).json({ success: false, msg: `You're too young for this.` });
+  // else if (age > 130 && age != '') return res.status(403).json({ success: false, msg: `You're too old for this.` });
 
   let newUser = new User({
     name: sanitizeName(req.body.name),
@@ -97,8 +97,8 @@ router.put('/:id', (req, res) => {
 
   // Validate the age
   let age = sanitizeAge(req.body.age);
-  if (age < 5 && age != '') return res.status(403).json({ success: false, msg: `You're too young for this.` });
-  else if (age > 130 && age != '') return res.status(403).json({ success: false, msg: `You're too old for this.` });
+  // if (age < 5 && age != '') return res.status(403).json({ success: false, msg: `You're too young for this.` });
+  // else if (age > 130 && age != '') return res.status(403).json({ success: false, msg: `You're too old for this.` });
 
   let updatedUser = {
     name: sanitizeName(req.body.name),
@@ -185,8 +185,10 @@ sanitizeEmail = (email) => {
 }
 sanitizeAge = (age) => {
   // Return empty if age is non-numeric
-  if (isNaN(age) && age != '') return '';
-  return (age === '') ? age : parseInt(age);
+  //if (isNaN(age) && age != '') return '';
+  //return (age === '') ? age : parseInt(age);
+  return age.toLowerCase();
+
 }
 sanitizeGender = (gender) => {
   // Return empty if it's neither of the two

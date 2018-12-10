@@ -18,9 +18,9 @@ class TableUser extends Component {
         <Table.Cell>{user.gender}</Table.Cell>
         <Table.Cell>
           <ModalUser
-            headerTitle='Edit User'
-            buttonTriggerTitle='Edit'
-            buttonSubmitTitle='Save'
+            headerTitle='Edit Event'
+            buttonTriggerTitle='Edit event'
+            buttonSubmitTitle='Save event'
             buttonColor='blue'
             userID={user._id}
             onUserUpdated={this.props.onUserUpdated}
@@ -28,8 +28,8 @@ class TableUser extends Component {
             socket={this.props.socket}
           />
           <ModalConfirmDelete
-            headerTitle='Delete User'
-            buttonTriggerTitle='Delete'
+            headerTitle='Delete event'
+            buttonTriggerTitle='Delete event'
             buttonColor='black'
             user={user}
             onUserDeleted={this.props.onUserDeleted}
@@ -49,9 +49,10 @@ class TableUser extends Component {
           <Table.Row>
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Email</Table.HeaderCell>
-            <Table.HeaderCell>Age</Table.HeaderCell>
+            <Table.HeaderCell>Description</Table.HeaderCell>
             <Table.HeaderCell>Gender</Table.HeaderCell>
             <Table.HeaderCell>Actions</Table.HeaderCell>
+            
           </Table.Row>
         </Table.Header>
         <Table.Body>

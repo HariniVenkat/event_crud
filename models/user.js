@@ -44,7 +44,8 @@ const UserSchema = new mongoose.Schema({
     validate: emailValidator
   },
   age: {
-    type: Number,
+    type: String,
+    required: [true, 'Name is required.'],
     validate: ageValidator
   },
   gender: {
