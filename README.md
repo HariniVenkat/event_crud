@@ -1,5 +1,9 @@
 # MERN CRUD
 
+refered from git repo  (master...slight changes done and few more to be done)
+https://github.com/cefjoeii/mern-crud
+
+
 A simple records system using MongoDB, Express.js, React.js, and Node.js with real-time Create, Read, Update, and Delete operations using Socket.io. REST API was implemented on the back-end. Semantic UI React was used for the UI.
 
 ![Node Version](https://img.shields.io/badge/node-v6.11.0-yellowgreen.svg)
