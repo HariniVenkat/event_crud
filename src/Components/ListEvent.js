@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 import '../index.css';
 import EventService from './Services';
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+
+
+
 var divStyle = {
     margin: '8% 8%',
 };
@@ -13,10 +18,21 @@ var divStyle = {
 class ListEvent extends Component {
 
     constructor(props) {
+
         super(props);
+        
+
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    
+        
         this.eventService = new EventService();
         this.state = {
-            events: []
+            events: [],
+            show: false
+
+
+
         }
         this.deleteEvent = this.deleteEvent.bind(this);
     }
@@ -24,6 +40,20 @@ class ListEvent extends Component {
     componentDidMount = () => {
         this.getEventList();
     }
+
+
+
+
+    
+  
+    handleClose() {
+        this.setState({ show: false });
+      }
+    
+      handleShow() {
+        this.setState({ show: true });
+      }
+    
 
     // To get all the events
     getEventList() {
@@ -39,12 +69,32 @@ class ListEvent extends Component {
             })
     }
 
-    // To delete any events
-    deleteEvent(empid) {
-        this.eventService.deleteEvent(empid);
-        this.getEventList();
-    }
+  //  To delete any events
+   // To delete any events
+   deleteEvent(empid) {
+    this.eventService.deleteEvent(empid);
+    this.getEventList();
+}
 
+
+  submit = (empid) => {
+    confirmAlert({
+      title: 'Confirm to submit',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => this.deleteEvent(empid)
+          
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Click No')
+        }
+      ]
+    })
+    this.getEventList();
+  };  
     render() {
         const { events } = this.state;
         return (
@@ -72,10 +122,17 @@ class ListEvent extends Component {
                                         <td>{event.eventDate}</td>
                                         <td>{event.numPeople}</td>
                                         <td>
-                                            <Link to={"editevent/" + event._id} className="btn btn-primary">Edit</Link>
+                                            <Link to={"editevent/" + event._id} className="btn btn-primary"  >Edit</Link>
+                 {/* <Button bsStyle="primary" bsSize="large" onClick={}> Edit   </Button> */}
+  
                                         </td>
                                         <td>
-                                            <Button onClick={() => this.deleteEvent(event._id)} bsStyle="danger" >Delete</Button>
+                                        
+                                        {/* <button onClick={this.submit(event._id)}>Confirm dialog</button> */}
+                                            <Button onClick={() => this.submit(event._id)} bsStyle="danger" >Delete</Button>
+                                        
+                        {/* <Button onClick={() => {if(cofirm('Delete the item?')){this.deleteEvent(event._id)};}}  bsStyle="danger" >Delete</Button> */}
+                                        
                                         </td>
                                     </tr>
                                 )

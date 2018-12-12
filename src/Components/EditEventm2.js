@@ -1,31 +1,23 @@
+//this is old edit events...
+
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Modal, Panel, Col, Row, Well, Button, ButtonGroup, Label} from 'react-bootstrap'; 
 
 const customStyle = {
     width: '300px',
     margin: '0 auto'
 }
 
-class EditEvent extends React.Component {
-    constructor(props, context) {
-      super(props, context);
-  
-      this.handleShow = this.handleShow.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-  
-      this.state = {
-        eventDescription: '',
-        eventTime: '',
-        eventDate: '',
-        numPeople: '',
-        show: true
-      };
+class EditEvent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            eventDescription: '',
+            eventTime: '',
+            eventDate: '',
+            numPeople: ''
+        }
     }
-
-
-
-    
 
     componentDidMount = () => {
         this.getEventById();
@@ -73,46 +65,10 @@ class EditEvent extends React.Component {
 
     }
 
-
-
-  
-    handleClose() {
-      this.setState({ show: false });
-    }
-  
-    handleShow() {
-      this.setState({ show: true });
-    }
-  
     render() {
-    //   const popover = (
-    //     <Popover id="modal-popover" title="popover">
-    //       very popover. such engagement
-    //     </Popover>
-    //   );
-    //   const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-  
-      return (
-        <div>
-     
-{/*   
-          <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
-            Launch demo modal
-          </Button> */}
-  
-          <Modal show={this.state.show} onHide={this.handleClose}>
-
-            <Modal.Header closeButton>
-              <Modal.Title>Event Edit Form</Modal.Title>
-
-            </Modal.Header>
-            <Modal.Body>
-              <h4>edit events</h4>
-
-
- {/* adding form code */}
-
-<form style={customStyle} onSubmit={this.handleSubmit}>
+        return (
+            <div className="container">
+                <form style={customStyle} onSubmit={this.handleSubmit}>
                     <label>
                     Event Description
 <input
@@ -157,26 +113,15 @@ class EditEvent extends React.Component {
                         />
                     </label>
                     <br />
-                    {/* button within form */}
                     <input
                         type="submit"
                         value="submit"
                         className="btn btn-primary"
                     />
                 </form>
-
-
-{/* adding form code */}
-
-              
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleClose}>Close</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      );
+            </div>
+        );
     }
-  }
-  
-  export default EditEvent;
+}
+
+export default EditEvent;

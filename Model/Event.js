@@ -7,16 +7,31 @@ const mongoose = require('mongoose');
 
  let Event = new Schema({
  eventDescription: {
- type: String
+ type: String,
+ required: true
+//  validate: [validators.notEmpty, 'Event description is empty']
+
+
  },
  eventTime: {
- type: String
+ type: String,
+ required: true
+ //validate: [validators.notEmpty, 'Time is empty']
+
+
+
  },
  eventDate: {
- type: String
+ type: String,
+ required: true
+ //validate: [validators.notEmpty, 'Date is empty']
+
  },
  numPeople: {
- type: Number
+ type: Number,
+ required: true
+ //validate: [validators.notEmpty, 'Member count is empty']
+
  }
  },{
  collection: 'events'
