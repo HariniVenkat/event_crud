@@ -1,63 +1,62 @@
+
 import React, { Component } from 'react';
-import axios from 'axios';
 import {Modal, Panel, Col, Row, Well, Button, ButtonGroup, Label} from 'react-bootstrap'; 
+import axios from 'axios';
 
 const customStyle = {
     width: '300px',
     margin: '0 auto'
 }
 
-class EditEvent extends React.Component {
-    constructor(props, context) {
-      super(props, context);
-  
-      this.handleShow = this.handleShow.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-  
-      this.state = {
-        eventDescription: '',
-        eventTime: '',
-        eventDate: '',
-        numPeople: '',
-        show: true
-      };
-    }
+class AddEvent extends Component {
+    constructor(props) {
+        super(props);
 
 
-
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     
 
-    componentDidMount = () => {
-        this.getEventById();
+
+        this.state = {
+            eventDescription: '',
+            eventTime: '',
+            eventDate: '',
+            numPeople: '',
+            show : true
+        }
     }
 
-    //changes till this done...
-
-    // To get event based on ID
-    getEventById() {
-        axios.get('http://localhost:4000/events/editEvent/' + this.props.match.params.id)
-            .then((response) => {
-                this.setState({
-                    eventDescription: response.data.eventDescription,
-                    eventTime: response.data.eventTime,
-                    eventDate: response.data.eventDate,
-                    numPeople: response.data.numPeople
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
-
+    // When value changes of the fields
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    // To update the record on submit
+//validate fields..
+
+
+
+handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
+
+
+
+    // To add new evente when user submits the form
     handleSubmit = (event) => {
         event.preventDefault();
+
         const { eventDescription, eventTime, eventDate, numPeople } = this.state;
-        axios.post('http://localhost:4000/events/updateEvent/' + this.props.match.params.id, {
+
+
+
+
+        
+        axios.post('http://localhost:4000/events/addEvent', {
             eventDescription: eventDescription,
             eventTime: eventTime,
             eventDate: eventDate,
@@ -68,55 +67,30 @@ class EditEvent extends React.Component {
                 this.props.history.push('/');
             })
             .catch((error) => {
-                console.log('^_^',error);
+                console.log(error);
             });
-
     }
 
 
-
-  
-    handleClose() {
-      this.setState({ show: false });
-      this.props.history.push('/');
-    }
-  
-    handleShow() {
-      this.setState({ show: true });
-    }
-  
     render() {
-    //   const popover = (
-    //     <Popover id="modal-popover" title="popover">
-    //       very popover. such engagement
-    //     </Popover>
-    //   );
-    //   const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-  
-      return (
-        <div>
-     
-{/*   
-          <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
-            Launch demo modal
-          </Button> */}
-  
-          <Modal show={this.state.show} onHide={this.handleClose}>
-
-            <Modal.Header closeButton>
-              <Modal.Title>Event Edit Form</Modal.Title>
-
-            </Modal.Header>
-            <Modal.Body>
-              <h4>edit events</h4>
+        return (
 
 
- {/* adding form code */}
+   <Modal show={this.state.show} onHide={this.handleClose}>
 
-<form style={customStyle} onSubmit={this.handleSubmit}>
+<Modal.Header closeButton>
+  <Modal.Title>Event Edit Form</Modal.Title>
+
+</Modal.Header>
+<Modal.Body>
+  <h4>edit events</h4>
+
+
+
+                <form style={customStyle} onSubmit={this.handleSubmit}>
                     <label>
-                    Event Description
-<input
+                    Event Description 
+ <input
                             name="eventDescription"
                             type="text"
                             required
@@ -128,12 +102,10 @@ class EditEvent extends React.Component {
                     <br />
                     <label>
                     Event Time
-<input
+ <input
                             name="eventTime"
-                            type="time"
+                            type="text"
                             required
-                            min="9:00" max="18:00"
-
                             value={this.state.eventTime}
                             onChange={this.handleChange}
                             className="form-control"
@@ -142,9 +114,9 @@ class EditEvent extends React.Component {
                     <br />
                     <label>
                     Event Date
-<input
+ <input
                             name="eventDate"
-                            type="Date"
+                            type="text"
                             required
                             value={this.state.eventDate}
                             onChange={this.handleChange}
@@ -154,9 +126,9 @@ class EditEvent extends React.Component {
                     <br />
                     <label>
                     Member Count
-<input
+ <input
                             name="numPeople"
-                            type="number"
+                            type="text"
                             required
                             value={this.state.numPeople}
                             onChange={this.handleChange}
@@ -164,26 +136,26 @@ class EditEvent extends React.Component {
                         />
                     </label>
                     <br />
-                    {/* button within form */}
                     <input
                         type="submit"
                         value="submit"
                         className="btn btn-primary"
                     />
                 </form>
+            
 
-
-{/* adding form code */}
 
               
-            </Modal.Body>
+              </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.handleClose}>Close</Button>
             </Modal.Footer>
           </Modal>
-        </div>
-      );
+
+
+
+        );
     }
-  }
-  
-  export default EditEvent;
+}
+
+export default AddEvent;

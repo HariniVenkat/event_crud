@@ -4,6 +4,9 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../index.css';
 
+
+
+
 class Header extends Component {
     render() {
         return (
@@ -23,6 +26,38 @@ class Header extends Component {
                         </NavItem>
                     </Nav>
                 </Navbar>
+
+                    {/* <Navbar inverse fixedTop>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <a href="/">React-Bootstrap</a>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav>
+                        <NavItem eventKey={1}
+                            href="/about">About</NavItem>
+                        <NavItem eventKey={2}
+                            href="/contacts">Contact Us</NavItem>
+                    
+                    <NavItem eventKey={2}
+                            href="/">Home</NavItem>
+                   
+                   <NavItem eventKey={2}
+                            href="/addevent">Add Item</NavItem>
+                   
+                    
+                    
+                    
+                    </Nav>
+        </Navbar.Collapse>
+        </Navbar> */}
+
+
+
+
+
             </div>
         );
     }

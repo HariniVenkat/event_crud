@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Table, Button } from 'react-bootstrap';
+
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-filter';
+
+
 // To use routing functionalities
 import { Link } from 'react-router-dom';
 import '../index.css';
@@ -14,6 +19,22 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 var divStyle = {
     margin: '8% 8%',
 };
+
+
+const columns = [{
+    dataField: 'event.eventDescription',
+    text: 'event description'
+  }, {
+    dataField: 'event.eventTime',
+    text: 'Evnet time',
+    filter: textFilter({
+      comparator: Comparator.EQ
+    })
+  }, {
+    dataField: 'event.numpeople',
+    text: 'people',
+    filter: textFilter()
+  }];
 
 class ListEvent extends Component {
 
@@ -89,7 +110,7 @@ class ListEvent extends Component {
         },
         {
           label: 'No',
-          onClick: () => alert('Click No')
+          onClick: () => this.getEventList()
         }
       ]
     })
@@ -100,6 +121,7 @@ class ListEvent extends Component {
         return (
             <div style={divStyle}>
                 <Table responsive>
+
                     <thead>
                         <tr>
                             <th>#</th>

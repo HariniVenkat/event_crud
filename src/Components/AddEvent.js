@@ -1,12 +1,32 @@
 
 import React, { Component } from 'react';
-import {Modal, Panel, Col, Row, Well, Button, ButtonGroup, Label} from 'react-bootstrap'; 
+import { Modal,  Button } from 'react-bootstrap';
+
+
+import { Field } from 'react-redux-form';
+import validator from 'validator';
+
+
+//import { Field } from 'redux-form';
+
 import axios from 'axios';
 
 const customStyle = {
     width: '300px',
     margin: '0 auto'
 }
+
+
+
+//form validation part
+
+
+
+//form validation part
+
+
+
+
 
 class AddEvent extends Component {
     constructor(props) {
@@ -15,7 +35,7 @@ class AddEvent extends Component {
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
-    
+
 
 
         this.state = {
@@ -23,7 +43,7 @@ class AddEvent extends Component {
             eventTime: '',
             eventDate: '',
             numPeople: '',
-            show : true
+            show: true
         }
     }
 
@@ -32,30 +52,21 @@ class AddEvent extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-//validate fields..
-
-
-
-handleClose() {
-    this.setState({ show: false });
-  }
-
-  handleShow() {
-    this.setState({ show: true });
-  }
-
-
-
+    //validate fields..
+    handleClose() {
+         this.setState({ show: false });
+         this.props.history.push('/');
+}
+    handleShow() { this.setState({ show: true }); }
     // To add new evente when user submits the form
+
+
     handleSubmit = (event) => {
         event.preventDefault();
 
         const { eventDescription, eventTime, eventDate, numPeople } = this.state;
 
 
-
-
-        
         axios.post('http://localhost:4000/events/addEvent', {
             eventDescription: eventDescription,
             eventTime: eventTime,
@@ -76,18 +87,20 @@ handleClose() {
         return (
 
 
-   <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal show={this.state.show} onHide={this.handleClose}>
 
-<Modal.Header closeButton>
-  <Modal.Title>Event Edit Form</Modal.Title>
+                <Modal.Header closeButton>
+                    <Modal.Title>Event ADD Form</Modal.Title>
 
-</Modal.Header>
-<Modal.Body>
-  <h4>edit events</h4>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>ADD EVENTS</h4>
+
+                    
+
+                    <form style={customStyle} onSubmit={this.handleSubmit}>
 
 
-
-                <form style={customStyle} onSubmit={this.handleSubmit}>
                     <label>
                     Event Description 
  <input
@@ -99,58 +112,78 @@ handleClose() {
                             className="form-control"
                         />
                     </label>
-                    <br />
-                    <label>
-                    Event Time
+                   
+                        
+                        <br /> 
+                        <label>
+                            Event Time
  <input
-                            name="eventTime"
-                            type="text"
-                            required
-                            value={this.state.eventTime}
-                            onChange={this.handleChange}
-                            className="form-control"
-                        />
-                    </label>
-                    <br />
-                    <label>
-                    Event Date
+                                name="eventTime"
+                              
+                                type="time"
+                            
+                                min="9:00" max="18:00"
+    
+
+                                required
+                                value={this.state.eventTime}
+                                onChange={this.handleChange}
+                                className="form-control"
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            Event Date
  <input
-                            name="eventDate"
-                            type="text"
-                            required
-                            value={this.state.eventDate}
-                            onChange={this.handleChange}
-                            className="form-control"
-                        />
-                    </label>
-                    <br />
-                    <label>
-                    Member Count
- <input
-                            name="numPeople"
-                            type="text"
-                            required
-                            value={this.state.numPeople}
-                            onChange={this.handleChange}
-                            className="form-control"
-                        />
-                    </label>
-                    <br />
-                    <input
-                        type="submit"
-                        value="submit"
-                        className="btn btn-primary"
-                    />
-                </form>
-            
+                                name="eventDate"
+                                type="Date"
+                                required
+                                value={this.state.eventDate}
+                                onChange={this.handleChange}
+                                className="form-control"
+                            />
+                        </label>
+                        <br />
 
 
-              
-              </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleClose}>Close</Button>
-            </Modal.Footer>
-          </Modal>
+                        <label>
+                            Member Count
+ <input
+                                name="numPeople"
+                                type="number"
+                                required
+                                value={this.state.numPeople}
+                                onChange={this.handleChange}
+                                className="form-control"
+                            />
+                        </label>
+
+ {/* <Field name="numPeople" type="text"
+                             value={this.state.numPeople}
+                             onChange={this.handleChange}
+                             component={renderField} label="numPeople"
+        validate={[ required, number ]}
+      /> */}
+
+
+
+
+                        <br />
+                        <input
+                            type="submit"
+                            value="submit"
+                            className="btn btn-primary"
+                        />
+                    </form>
+
+
+
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.handleClose}>Close</Button>
+                </Modal.Footer>
+            </Modal>
 
 
 
