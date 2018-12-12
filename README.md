@@ -10,8 +10,8 @@ cd Server
 Node server.js
 
 ## Avoid these files for now
-## /Components
-AddEventv2
-EditEventm2
-Header1
-SideCard
+## /src /Components
+/AddEventv2.js
+/EditEventm2.js
+/Header1.js
+/SideCard.js
